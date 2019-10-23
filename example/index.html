@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blueprint Background Generator</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="d-flex flex-row">
+  <div id="viewer" class="d-flex flex-fill justify-content-start align-items-center"></div>
+
+  <div id="panel">
+    <div id="config">
+      <div class="icon position-fixed" title="Configure options" onclick="toggleVisibility('config')">
+        <div class="h-100 d-flex flex-fill justify-content-center align-items-center">
+          <i class="fas fa-cog"></i>
+        </div>
+      </div>
+
+      <h1 class="title d-flex justify-content-start align-items-center">Blueprint background css generator</h1>
+
+      <div class="panel position-fixed">
+        <div class="d-flex p-3 flex-column align-items-stretch justify-content-start">
+          <h1 class="text-center">Config</h1>
+
+          <div class="d-flex flex-column mt-4">
+            <h4>Background</h4>
+            <hr/>
+
+            <div class="input-group mt-3 d-flex flex-column">
+              <div class="mb-1">Color</div>
+              <div id="background-color-picker" class="color-picker"></div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column mt-4">
+            <h4>Grid lines</h4>
+            <hr/>
+
+            <div class="input-group mt-3 d-flex flex-column">
+              <div class="mb-1">Color</div>
+              <div id="grid-color-picker" class="color-picker"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="css">
+      <div class="icon position-fixed" title="CSS code" onclick="toggleVisibility('css'); generateCSS()">
+        <div class="h-100 d-flex flex-fill justify-content-center align-items-center">
+          <i class="fas fa-file-code"></i>
+        </div>
+      </div>
+
+      <div class="panel position-fixed">
+        <div class="d-flex p-3 flex-column align-items-stretch justify-content-start">
+          <h1 class="text-center">CSS Code</h1>
+
+          <div id="code" class="d-flex flex-column mt-4">
+            <pre><code class="language-css"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-css.min.js"></script>
+  <script type="text/javascript" src="./../src/generator.js"></script>
+  <script type="text/javascript" src="./script.js"></script>
+  <script type="text/javascript">
+    (function initialize() {
+      setBackgroundColor();
+      setGridLines();
+    })();
+  </script>
+</body>
+</html>
